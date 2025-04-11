@@ -14,7 +14,6 @@ services:
     tty: true
     stdin_open: true
     working_dir: /workspace
-    command: /usr/local/bin/entrypoint.sh
     user: developer
 
 volumes:

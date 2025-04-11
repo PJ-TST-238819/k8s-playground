@@ -1,0 +1,3 @@
+[submodule "node-server"]
+	path = node-server
+	url = git@github.com:PJ-TST-238819/node-server.git
