@@ -14,7 +14,7 @@ RUN apt-get install -y docker.io
 RUN apt-get install -y docker-compose-plugin
 
 # Install other useful tools
-RUN apt-get install -y git vim curl sudo
+RUN apt-get install -y git vim curl sudo build-essential
 
 # Create a non-root user
 ARG USER_ID=1000
@@ -28,5 +28,9 @@ RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} && ch
 # Install kubectl
 COPY install_kubectl.sh /usr/local/bin/install_kubectl.sh
 RUN bash /usr/local/bin/install_kubectl.sh
+
+# Install Kind
+RUN curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+RUN chmod +x /usr/local/bin/kind
 
 USER ${USERNAME}
