@@ -1,0 +1,21 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace
+      - ./.docker/ssh:/home/developer/.ssh
+      - ./.docker/kube:/home/developer/.kube
+    ports:
+      - 8080:8080
+    environment:
+      - NODE_ENV=development
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    command: /usr/local/bin/entrypoint.sh
+    user: developer
+
+volumes:
+  ssh:

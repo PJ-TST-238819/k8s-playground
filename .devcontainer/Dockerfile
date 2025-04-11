@@ -33,4 +33,21 @@ RUN bash /usr/local/bin/install_kubectl.sh
 RUN curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
 RUN chmod +x /usr/local/bin/kind
 
+# Install Helm
+RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Generate SSH key
+RUN mkdir -p /home/${USERNAME}/.ssh && \
+  ssh-keygen -t rsa -b 4096 -f /home/${USERNAME}/.ssh/id_rsa -N "" && \
+  chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.ssh
+
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Set ownership of the script to the non-root user
+RUN chown ${USERNAME}:${USERNAME} /usr/local/bin/entrypoint.sh
+
+# Make the script executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 USER ${USERNAME}

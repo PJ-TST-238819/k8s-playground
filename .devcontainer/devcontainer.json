@@ -1,11 +1,11 @@
 {
   "name": "Ubuntu with Docker",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
+  "workspaceFolder": "/workspace",
   "customizations": {
     "vscode": {
       "extensions": [
